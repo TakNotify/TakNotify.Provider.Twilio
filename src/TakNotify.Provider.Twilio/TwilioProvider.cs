@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
+using System.Net.Http;
 using System.Threading.Tasks;
-using Twilio;
 using Twilio.Clients;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
@@ -11,25 +10,24 @@ namespace TakNotify
 {
     public class TwilioProvider : NotificationProvider
     {
-        private readonly TwilioOptions _options;
         private readonly ITwilioRestClient _twilioClient;
 
-        public TwilioProvider(TwilioOptions options, ILoggerFactory loggerFactory) 
-            : base(options, loggerFactory)
+        public TwilioProvider(ITwilioRestClient twilioClient, ILoggerFactory loggerFactory)
+            : base(new NotificationProviderOptions(), loggerFactory)
         {
-            _options = options;
-            
-            TwilioClient.Init(options.AccountSid, options.AuthToken);
-            _twilioClient = TwilioClient.GetRestClient();
+            _twilioClient = twilioClient;
         }
 
-        public TwilioProvider(IOptions<TwilioOptions> options, ILoggerFactory loggerFactory)
+        public TwilioProvider(TwilioOptions options, HttpClient httpClient, ILoggerFactory loggerFactory) 
+            : base(options, loggerFactory)
+        {
+            _twilioClient = new TwilioClient(options.AccountSid, options.AuthToken, httpClient);
+        }
+
+        public TwilioProvider(IOptions<TwilioOptions> options, HttpClient httpClient, ILoggerFactory loggerFactory)
             : base(options.Value, loggerFactory)
         {
-            _options = options.Value;
-
-            TwilioClient.Init(options.Value.AccountSid, options.Value.AuthToken);
-            _twilioClient = TwilioClient.GetRestClient();
+            _twilioClient = new TwilioClient(options.Value.AccountSid, options.Value.AuthToken, httpClient);
         }
 
         public override string Name => TwilioConstants.DefaultName;
@@ -38,12 +36,17 @@ namespace TakNotify
         {
             var smsMessage = new SMSMessage(messageParameters);
 
-            var messageResource = await MessageResource.CreateAsync(
+            Logger.LogDebug(TwilioLogMessages.Sending_Start, smsMessage.ToNumber);
+
+            var message = await MessageResource.CreateAsync(
                 new PhoneNumber(smsMessage.ToNumber),
                 from: new PhoneNumber(smsMessage.FromNumber),
-                body: smsMessage.Content);
+                body: smsMessage.Content,
+                client: _twilioClient);
 
-            throw new NotImplementedException();
+            Logger.LogDebug(TwilioLogMessages.Sending_End, smsMessage.ToNumber, message.Sid);
+
+            return new NotificationResult(true);
         }
     }
 }
