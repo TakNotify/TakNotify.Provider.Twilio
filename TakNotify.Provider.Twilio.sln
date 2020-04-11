@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A78365A5-EA56-4261-B057-F47A2712714B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakNotify.Provider.Twilio", "src\TakNotify.Provider.Twilio\TakNotify.Provider.Twilio.csproj", "{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B082EAB6-B812-43B7-9791-9EA51869A569}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakNotify.Provider.Twilio.Test", "test\TakNotify.Provider.Twilio.Test\TakNotify.Provider.Twilio.Test.csproj", "{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Debug|x64.Build.0 = Debug|Any CPU
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Debug|x86.Build.0 = Debug|Any CPU
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Release|x64.ActiveCfg = Release|Any CPU
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Release|x64.Build.0 = Release|Any CPU
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Release|x86.ActiveCfg = Release|Any CPU
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9}.Release|x86.Build.0 = Release|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Debug|x64.Build.0 = Debug|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Debug|x86.Build.0 = Debug|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Release|x64.ActiveCfg = Release|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Release|x64.Build.0 = Release|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Release|x86.ActiveCfg = Release|Any CPU
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9} = {A78365A5-EA56-4261-B057-F47A2712714B}
+		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6} = {B082EAB6-B812-43B7-9791-9EA51869A569}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {449E968E-F04C-46C1-9F16-2FDB40C0D725}
+	EndGlobalSection
+EndGlobal
