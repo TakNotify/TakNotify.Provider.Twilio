@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) Frandi Dwi 2020. All rights reserved.
+// Licensed under the MIT License.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
