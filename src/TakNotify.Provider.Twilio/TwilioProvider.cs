@@ -26,10 +26,10 @@ namespace TakNotify
             _twilioClient = new TwilioClient(options.AccountSid, options.AuthToken, httpClient);
         }
 
-        public TwilioProvider(IOptions<TwilioOptions> options, HttpClient httpClient, ILoggerFactory loggerFactory)
+        public TwilioProvider(IOptions<TwilioOptions> options, IHttpClientFactory httpClientFactory, ILoggerFactory loggerFactory)
             : base(options.Value, loggerFactory)
         {
-            _twilioClient = new TwilioClient(options.Value.AccountSid, options.Value.AuthToken, httpClient);
+            _twilioClient = new TwilioClient(options.Value.AccountSid, options.Value.AuthToken, httpClientFactory.CreateClient());
         }
 
         public override string Name => TwilioConstants.DefaultName;
