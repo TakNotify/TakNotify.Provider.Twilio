@@ -352,3 +352,5 @@ MigrationBackup/
 .vscode/
 
 dist/
+
+appsettings.Development.json

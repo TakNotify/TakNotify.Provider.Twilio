@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakNotify.Provider.Twilio",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B082EAB6-B812-43B7-9791-9EA51869A569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakNotify.Provider.Twilio.Test", "test\TakNotify.Provider.Twilio.Test\TakNotify.Provider.Twilio.Test.csproj", "{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakNotify.Provider.Twilio.Test", "test\TakNotify.Provider.Twilio.Test\TakNotify.Provider.Twilio.Test.csproj", "{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{A8326D02-1AAE-41D6-9606-FB86794A5098}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "samples\ConsoleApp\ConsoleApp.csproj", "{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,18 @@ Global
 		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Release|x64.Build.0 = Release|Any CPU
 		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Release|x86.ActiveCfg = Release|Any CPU
 		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6}.Release|x86.Build.0 = Release|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Debug|x64.Build.0 = Debug|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Debug|x86.Build.0 = Debug|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Release|x64.ActiveCfg = Release|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Release|x64.Build.0 = Release|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Release|x86.ActiveCfg = Release|Any CPU
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +68,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2AC0A9C6-2836-4CBA-A11B-53EAC0B6B4A9} = {A78365A5-EA56-4261-B057-F47A2712714B}
 		{013BF9FD-DFE1-4A35-AA0B-23ABAC006ED6} = {B082EAB6-B812-43B7-9791-9EA51869A569}
+		{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31} = {A8326D02-1AAE-41D6-9606-FB86794A5098}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {449E968E-F04C-46C1-9F16-2FDB40C0D725}
