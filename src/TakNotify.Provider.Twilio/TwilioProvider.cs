@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Twilio.Clients;
@@ -38,15 +40,22 @@ namespace TakNotify
 
             Logger.LogDebug(TwilioLogMessages.Sending_Start, smsMessage.ToNumber);
 
-            var message = await MessageResource.CreateAsync(
-                new PhoneNumber(smsMessage.ToNumber),
-                from: new PhoneNumber(smsMessage.FromNumber),
-                body: smsMessage.Content,
-                client: _twilioClient);
+            try
+            {
+                var message = await MessageResource.CreateAsync(
+                        new PhoneNumber(smsMessage.ToNumber),
+                        from: new PhoneNumber(smsMessage.FromNumber),
+                        body: smsMessage.Content,
+                        client: _twilioClient);
 
-            Logger.LogDebug(TwilioLogMessages.Sending_End, smsMessage.ToNumber, message.Sid);
-
-            return new NotificationResult(true);
+                Logger.LogDebug(TwilioLogMessages.Sending_End, smsMessage.ToNumber, message.Sid);
+                return new NotificationResult(true);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, TwilioLogMessages.Sending_Failed, smsMessage.ToNumber, ex.Message);
+                return new NotificationResult(new List<string> { ex.Message });
+            }
         }
     }
 }

@@ -18,5 +18,10 @@ namespace TakNotify
         /// The message to display after sending sms
         /// </summary>
         public const string Sending_End = "SMS has been sent to {toAddresses}. Sid: {messageSid}";
+
+        /// <summary>
+        /// The failed message
+        /// </summary>
+        public const string Sending_Failed = "Failed to send SMS to {toAddress}. Error: {error}";
     }
 }

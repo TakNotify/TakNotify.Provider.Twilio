@@ -17,13 +17,13 @@ namespace TakNotify
 
         public string AccountSid
         {
-            get => Parameters[Parameter_AccountSid].ToString();
+            get => Parameters[Parameter_AccountSid]?.ToString();
             set => Parameters[Parameter_AccountSid] = value;
         }
 
         public string AuthToken
         {
-            get => Parameters[Parameter_AuthToken].ToString();
+            get => Parameters[Parameter_AuthToken]?.ToString();
             set => Parameters[Parameter_AuthToken] = value;
         }
 
