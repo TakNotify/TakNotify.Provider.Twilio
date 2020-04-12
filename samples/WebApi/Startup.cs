@@ -30,15 +30,13 @@ namespace WebApi
         {
             services.AddControllers();
 
-            services.AddHttpClient();
-
             services
                 .AddTakNotify()
                 .AddProvider<TwilioProvider, TwilioOptions>(options =>
                 {
                     options.AccountSid = Configuration["Twilio:AccountSid"];
                     options.AuthToken = Configuration["Twilio:AuthToken"];
-                });
+                }, true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
