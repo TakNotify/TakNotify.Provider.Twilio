@@ -11,22 +11,36 @@ namespace TakNotify
     /// Custom implementation of <see cref="ITwilioRestClient"/>
     /// to allow integration with <see cref="System.Net.Http.HttpClient"/>
     /// </summary>
-    public class TwilioClient : ITwilioRestClient
+    public class CustomTwilioRestClient : ITwilioRestClient
     {
         private readonly ITwilioRestClient _innerClient;
 
         /// <summary>
-        /// Create the instance of <see cref="TakNotify.TwilioClient"/>
+        /// Create the instance of <see cref="CustomTwilioRestClient"/>
         /// </summary>
         /// <param name="accountSid">The Twilio Account SID</param>
         /// <param name="authToken">The Twilio Auth Token</param>
-        /// <param name="httpClient">The instance of <see cref="System.Net.Http.HttpClient"/></param>
-        public TwilioClient(string accountSid, string authToken, HttpClient httpClient)
+        /// <param name="twilioHttpClient">The instance of <see cref="TwilioHttp.HttpClient"/></param>
+        public CustomTwilioRestClient(string accountSid, string authToken, TwilioHttp.HttpClient twilioHttpClient)
         {
             _innerClient = new TwilioRestClient(
                 accountSid,
                 authToken,
-                httpClient: new TwilioHttp.SystemNetHttpClient(httpClient));
+                httpClient: twilioHttpClient);
+        }
+
+        /// <summary>
+        /// Create the instance of <see cref="CustomTwilioRestClient"/>
+        /// </summary>
+        /// <param name="accountSid">The Twilio Account SID</param>
+        /// <param name="authToken">The Twilio Auth Token</param>
+        /// <param name="netHttpClient">The instance of <see cref="System.Net.Http.HttpClient"/></param>
+        public CustomTwilioRestClient(string accountSid, string authToken, HttpClient netHttpClient)
+        {
+            _innerClient = new TwilioRestClient(
+                accountSid,
+                authToken,
+                httpClient: new TwilioHttp.SystemNetHttpClient(netHttpClient));
         }
 
         /// <summary>

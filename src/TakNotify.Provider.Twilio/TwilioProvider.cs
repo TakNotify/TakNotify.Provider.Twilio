@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Twilio.Clients;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
+using TwilioHttp = Twilio.Http;
 
 namespace TakNotify
 {
@@ -17,29 +18,30 @@ namespace TakNotify
     /// </summary>
     public class TwilioProvider : NotificationProvider
     {
-        private readonly ITwilioRestClient _twilioClient;
-
+        private readonly ITwilioRestClient _twilioRestClient;
+        
         /// <summary>
         /// Create the instance of <see cref="TwilioProvider"/>
         /// </summary>
-        /// <param name="twilioClient">The instance of <see cref="ITwilioRestClient"/></param>
+        /// <param name="options">The Twilio provider options</param>
+        /// <param name="twilioHttpClient">The instance of <see cref="TwilioHttp.HttpClient"/></param>
         /// <param name="loggerFactory">The instance of <see cref="ILoggerFactory"/></param>
-        public TwilioProvider(ITwilioRestClient twilioClient, ILoggerFactory loggerFactory)
-            : base(new NotificationProviderOptions(), loggerFactory)
+        public TwilioProvider(TwilioOptions options, TwilioHttp.HttpClient twilioHttpClient, ILoggerFactory loggerFactory)
+            : base(options, loggerFactory)
         {
-            _twilioClient = twilioClient;
+            _twilioRestClient = new CustomTwilioRestClient(options.AccountSid, options.AuthToken, twilioHttpClient);
         }
 
         /// <summary>
         /// Create the instance of <see cref="TwilioProvider"/>
         /// </summary>
         /// <param name="options">The Twilio provider options</param>
-        /// <param name="httpClient">The instance of <see cref="HttpClient"/></param>
+        /// <param name="netHttpClient">The instance of <see cref="HttpClient"/></param>
         /// <param name="loggerFactory">The instance of <see cref="ILoggerFactory"/></param>
-        public TwilioProvider(TwilioOptions options, HttpClient httpClient, ILoggerFactory loggerFactory) 
+        public TwilioProvider(TwilioOptions options, HttpClient netHttpClient, ILoggerFactory loggerFactory) 
             : base(options, loggerFactory)
         {
-            _twilioClient = new TwilioClient(options.AccountSid, options.AuthToken, httpClient);
+            _twilioRestClient = new CustomTwilioRestClient(options.AccountSid, options.AuthToken, netHttpClient);
         }
 
         /// <summary>
@@ -51,7 +53,7 @@ namespace TakNotify
         public TwilioProvider(IOptions<TwilioOptions> options, IHttpClientFactory httpClientFactory, ILoggerFactory loggerFactory)
             : base(options.Value, loggerFactory)
         {
-            _twilioClient = new TwilioClient(options.Value.AccountSid, options.Value.AuthToken, httpClientFactory.CreateClient());
+            _twilioRestClient = new CustomTwilioRestClient(options.Value.AccountSid, options.Value.AuthToken, httpClientFactory.CreateClient());
         }
 
         /// <inheritdoc cref="NotificationProvider.Name"/>
@@ -70,10 +72,10 @@ namespace TakNotify
                         new PhoneNumber(smsMessage.ToNumber),
                         from: new PhoneNumber(smsMessage.FromNumber),
                         body: smsMessage.Content,
-                        client: _twilioClient);
+                        client: _twilioRestClient);
 
                 Logger.LogDebug(TwilioLogMessages.Sending_End, smsMessage.ToNumber, message.Sid);
-                return new NotificationResult(true);
+                return new NotificationResult(true, new Dictionary<string, object> { { nameof(message.Sid), message.Sid } });
             }
             catch (Exception ex)
             {

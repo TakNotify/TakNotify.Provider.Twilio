@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.3" />
-    <PackageReference Include="TakNotify" Version="1.1.0" />
+    <PackageReference Include="TakNotify" Version="1.1.1" />
     <PackageReference Include="Twilio" Version="5.39.0" />
   </ItemGroup>
 
