@@ -13,9 +13,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TakNotify.Provider.Twilio.T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{A8326D02-1AAE-41D6-9606-FB86794A5098}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "samples\ConsoleApp\ConsoleApp.csproj", "{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "samples\ConsoleApp\ConsoleApp.csproj", "{EB8A1BDE-84D7-47B5-BF92-FFD3C64D8B31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "samples\WebApi\WebApi.csproj", "{144C2B20-1B58-437F-B652-D758FEBEB16B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "samples\WebApi\WebApi.csproj", "{144C2B20-1B58-437F-B652-D758FEBEB16B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7CEF6E9E-69D4-416E-950E-6C59852A12C5}"
+	ProjectSection(SolutionItems) = preProject
+		build-test.ps1 = build-test.ps1
+		build.ps1 = build.ps1
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
