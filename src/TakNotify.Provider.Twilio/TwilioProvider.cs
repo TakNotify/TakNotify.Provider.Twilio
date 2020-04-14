@@ -29,7 +29,7 @@ namespace TakNotify
         public TwilioProvider(TwilioOptions options, TwilioHttp.HttpClient twilioHttpClient, ILoggerFactory loggerFactory)
             : base(options, loggerFactory)
         {
-            _twilioRestClient = new CustomTwilioRestClient(options.AccountSid, options.AuthToken, twilioHttpClient);
+            _twilioRestClient = new TwilioRestClient(options.AccountSid, options.AuthToken, httpClient: twilioHttpClient);
         }
 
         /// <summary>
@@ -41,7 +41,8 @@ namespace TakNotify
         public TwilioProvider(TwilioOptions options, HttpClient netHttpClient, ILoggerFactory loggerFactory) 
             : base(options, loggerFactory)
         {
-            _twilioRestClient = new CustomTwilioRestClient(options.AccountSid, options.AuthToken, netHttpClient);
+            _twilioRestClient = new TwilioRestClient(options.AccountSid, options.AuthToken, 
+                httpClient: new TwilioHttp.SystemNetHttpClient(netHttpClient));
         }
 
         /// <summary>
@@ -53,7 +54,8 @@ namespace TakNotify
         public TwilioProvider(IOptions<TwilioOptions> options, IHttpClientFactory httpClientFactory, ILoggerFactory loggerFactory)
             : base(options.Value, loggerFactory)
         {
-            _twilioRestClient = new CustomTwilioRestClient(options.Value.AccountSid, options.Value.AuthToken, httpClientFactory.CreateClient());
+            _twilioRestClient = new TwilioRestClient(options.Value.AccountSid, options.Value.AuthToken, 
+                httpClient: new TwilioHttp.SystemNetHttpClient(httpClientFactory.CreateClient()));
         }
 
         /// <inheritdoc cref="NotificationProvider.Name"/>

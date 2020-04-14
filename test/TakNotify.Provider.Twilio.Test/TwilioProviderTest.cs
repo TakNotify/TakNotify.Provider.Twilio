@@ -1,9 +1,10 @@
+// Copyright (c) Frandi Dwi 2020. All rights reserved.
+// Licensed under the MIT License.
 using Microsoft.Extensions.Logging;
 using Moq;
 using TakNotify.Test;
-using TwilioHttp = Twilio.Http;
 using Xunit;
-using Twilio.Rest.Api.V2010.Account;
+using TwilioHttp = Twilio.Http;
 
 namespace TakNotify.Provider.Twilio.Test
 {
