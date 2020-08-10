@@ -77,5 +77,46 @@ namespace TakNotify.Provider.Twilio.Test
             var warningMessage = LoggerHelper.FormatLogValues(TwilioLogMessages.Sending_Failed, message.ToNumber, result.Errors);
             _logger.VerifyLog(LogLevel.Warning, warningMessage);
         }
+
+        [Fact]
+        public async void Send_WithDefaultFromNumber_Success()
+        {
+            _twilioHttpClient.Setup(client => client.MakeRequestAsync(It.IsAny<TwilioHttp.Request>()))
+                .ReturnsAsync(new TwilioHttp.Response(System.Net.HttpStatusCode.OK, "{'sid': '111'}"));
+
+            var message = new SMSMessage
+            {
+                ToNumber = "0321",
+                Content = "Test"
+            };
+
+            var provider = new TwilioProvider(
+                new TwilioOptions() { DefaultFromNumber = "000" }, 
+                _twilioHttpClient.Object, 
+                _loggerFactory.Object);
+            var result = await provider.Send(message.ToParameters());
+            var sid = result.ReturnedValues["Sid"].ToString();
+
+            Assert.True(result.IsSuccess);
+            Assert.Equal("111", sid);
+            Assert.Empty(result.Errors);
+        }
+
+        [Fact]
+        public async void Send_WithoutFromNumber_ReturnError()
+        {
+            var message = new SMSMessage
+            {
+                ToNumber = "0321",
+                Content = "Test"
+            };
+
+            var provider = new TwilioProvider(new TwilioOptions(), _twilioHttpClient.Object, _loggerFactory.Object);
+            var result = await provider.Send(message.ToParameters());
+
+            Assert.False(result.IsSuccess);
+            Assert.NotEmpty(result.Errors);
+            Assert.Equal("From Number should not be empty", result.Errors[0]);
+        }
     }
 }
