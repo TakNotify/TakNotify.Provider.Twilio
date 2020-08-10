@@ -19,7 +19,8 @@ namespace TakNotify
     public class TwilioProvider : NotificationProvider
     {
         private readonly ITwilioRestClient _twilioRestClient;
-        
+        private readonly TwilioOptions _options;
+
         /// <summary>
         /// Create the instance of <see cref="TwilioProvider"/>
         /// </summary>
@@ -30,6 +31,7 @@ namespace TakNotify
             : base(options, loggerFactory)
         {
             _twilioRestClient = new TwilioRestClient(options.AccountSid, options.AuthToken, httpClient: twilioHttpClient);
+            _options = options;
         }
 
         /// <summary>
@@ -43,6 +45,7 @@ namespace TakNotify
         {
             _twilioRestClient = new TwilioRestClient(options.AccountSid, options.AuthToken, 
                 httpClient: new TwilioHttp.SystemNetHttpClient(netHttpClient));
+            _options = options;
         }
 
         /// <summary>
@@ -56,6 +59,7 @@ namespace TakNotify
         {
             _twilioRestClient = new TwilioRestClient(options.Value.AccountSid, options.Value.AuthToken, 
                 httpClient: new TwilioHttp.SystemNetHttpClient(httpClientFactory.CreateClient()));
+            _options = options.Value;
         }
 
         /// <inheritdoc cref="NotificationProvider.Name"/>
@@ -66,13 +70,21 @@ namespace TakNotify
         {
             var smsMessage = new SMSMessage(messageParameters);
 
+            PhoneNumber fromNumber;
+            if (!string.IsNullOrEmpty(smsMessage.FromNumber))
+                fromNumber = new PhoneNumber(smsMessage.FromNumber);
+            else if (_options != null && !string.IsNullOrEmpty(_options.DefaultFromNumber))
+                fromNumber = new PhoneNumber(_options.DefaultFromNumber);
+            else
+                return new NotificationResult(new List<string> { "From Number should not be empty" });
+
             Logger.LogDebug(TwilioLogMessages.Sending_Start, smsMessage.ToNumber);
 
             try
             {
                 var message = await MessageResource.CreateAsync(
                         new PhoneNumber(smsMessage.ToNumber),
-                        from: new PhoneNumber(smsMessage.FromNumber),
+                        from: fromNumber,
                         body: smsMessage.Content,
                         client: _twilioRestClient);
 
